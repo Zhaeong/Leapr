@@ -33,7 +33,8 @@ public class MovementController : MonoBehaviour {
             if (Physics.Raycast(ray, out hitInfo, 100))
             {
                 //playerObject.transform.position = MainCam.ScreenToWorldPoint(Input.mousePosition);
-                playerObject.transform.position = hitInfo.point;
+                if(hitInfo.transform.gameObject.tag == "Platform")
+                    playerObject.transform.position = hitInfo.point;
 
             }
         }
