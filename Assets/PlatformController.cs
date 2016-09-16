@@ -24,8 +24,8 @@ public class PlatformController : MonoBehaviour {
 
         if (stepSpeed > spawnSpeed)
         {
-            SpawnPlat();
-            SpawnPlat();
+            SpawnPlat(-10, 0, platSpeed);
+            SpawnPlat(1, 10, platSpeed);
 
             stepSpeed = 0.0f;
 
@@ -34,16 +34,21 @@ public class PlatformController : MonoBehaviour {
 
     }
 
-    void SpawnPlat()
+    void SpawnPlat(float SpawnLow, float SpawnHigh, float SpawnSpeed)
     {
-        float varX = Random.Range(-10, 10);
+        //Where the platform is spawned
+        float varX = Random.Range(SpawnLow, SpawnHigh);
+        //The dimensions of the platform
+        float varWidth = Random.Range(5, 10);
+        float varHeight = Random.Range(5, 10);
 
         Vector3 SpawnPos = new Vector3(varX, StartPos.position.y, StartPos.position.z);
         Vector3 SpawnEndPos = new Vector3(varX, EndPos.position.y, EndPos.position.z);
         GameObject Pla1 = (GameObject)Instantiate(platformBasic, SpawnPos, Quaternion.identity);
 
         Pla1.GetComponent<PlatformSpeed>().endPos = SpawnEndPos;
-        Pla1.GetComponent<PlatformSpeed>().speed = platSpeed;
+        Pla1.GetComponent<PlatformSpeed>().speed = SpawnSpeed;
+        Pla1.transform.localScale = new Vector3(varWidth, 1, varHeight);
 
     }
 
