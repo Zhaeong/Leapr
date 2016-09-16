@@ -64,8 +64,9 @@ public class MovementController : MonoBehaviour {
                 MovingToPlat = false;
                 playerObject.transform.parent = hitInfo.transform;
             }
+
                 
-            playerObject.transform.position = Vector3.Lerp(StartPos, MarkerObj.transform.position, LerpingTime);
+            playerObject.transform.position = Vector3.Lerp(StartPos, MarkerObj.transform.position, LerpingTime/1);
 
         }
 
