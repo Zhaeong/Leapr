@@ -31,23 +31,26 @@ public class MovementController : MonoBehaviour {
         //    }
         //}
 
-        if(Input.GetMouseButton(0))
+        if (!MovingToPlat)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hitInfo, 100))
+            if (Input.GetMouseButton(0))
             {
-                //playerObject.transform.position = MainCam.ScreenToWorldPoint(Input.mousePosition);
-                if(hitInfo.transform.gameObject.tag == "Platform")
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hitInfo, 100))
                 {
-                    MarkerObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 0.1f, hitInfo.point.z);
-                    MarkerObj.transform.parent = hitInfo.transform;
-                    StartPos = playerObject.transform.position;
+                    //playerObject.transform.position = MainCam.ScreenToWorldPoint(Input.mousePosition);
+                    if (hitInfo.transform.gameObject.tag == "Platform")
+                    {
+                        MarkerObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 0.1f, hitInfo.point.z);
+                        MarkerObj.transform.parent = hitInfo.transform;
+                        StartPos = playerObject.transform.position;
+                        playerObject.transform.parent = null;
 
-                    MovingToPlat = true;
-                    LerpTime = 0.0f;
-                    LerpingTime = 0.0f;
-
+                        MovingToPlat = true;
+                        LerpTime = 0.0f;
+                        LerpingTime = 0.0f;
+                    }
                 }
             }
         }
@@ -58,7 +61,8 @@ public class MovementController : MonoBehaviour {
             if (LerpingTime > 1.0f)
             {
                 LerpingTime = 1.0f;
-                //MovingToPlat = false;
+                MovingToPlat = false;
+                playerObject.transform.parent = hitInfo.transform;
             }
                 
             playerObject.transform.position = Vector3.Lerp(StartPos, MarkerObj.transform.position, LerpingTime);
