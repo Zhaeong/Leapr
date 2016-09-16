@@ -33,13 +33,13 @@ public class MovementController : MonoBehaviour {
 
         if (!MovingToPlat)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hitInfo, 100))
                 {
-                    //playerObject.transform.position = MainCam.ScreenToWorldPoint(Input.mousePosition);
+                    
                     if (hitInfo.transform.gameObject.tag == "Platform")
                     {
                         MarkerObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 0.1f, hitInfo.point.z);
