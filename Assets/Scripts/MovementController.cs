@@ -22,14 +22,33 @@ public class MovementController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //foreach(Touch touch in Input.touches)
-        //{
-        //    if(touch.phase == TouchPhase.Began)
-        //    {
-        //        Debug.Log("regist");
-        //        playerObject.transform.position = MainCam.ScreenToWorldPoint(touch.position);
-        //    }
-        //}
+        if (!MovingToPlat)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+
+                    var ray = Camera.main.ScreenPointToRay(touch.position);
+
+                    if (Physics.Raycast(ray, out hitInfo, 100))
+                    {
+
+                        if (hitInfo.transform.gameObject.tag == "Platform")
+                        {
+                            MarkerObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 0.1f, hitInfo.point.z);
+                            MarkerObj.transform.parent = hitInfo.transform;
+                            StartPos = playerObject.transform.position;
+                            playerObject.transform.parent = null;
+
+                            MovingToPlat = true;
+                            LerpTime = 0.0f;
+                            LerpingTime = 0.0f;
+                        }
+                    }
+                }
+            }
+        }
 
         if (!MovingToPlat)
         {
