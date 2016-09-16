@@ -4,14 +4,19 @@ using System.Collections;
 public class MovementController : MonoBehaviour {
 
     public GameObject playerObject;
+    public GameObject MarkerObj;
+    public float playerSpeed = 5.0f;
 
-    Camera MainCam;
-
-    RaycastHit hitInfo;
+    private Camera MainCam;
+    private RaycastHit hitInfo;
+    private Vector3 StartPos;
+    private bool MovingToPlat;
+    private float LerpTime, LerpingTime;
 
     // Use this for initialization
     void Start () {
         MainCam = Camera.main;
+        MovingToPlat = false;
     }
 	
 	// Update is called once per frame
@@ -34,11 +39,32 @@ public class MovementController : MonoBehaviour {
             {
                 //playerObject.transform.position = MainCam.ScreenToWorldPoint(Input.mousePosition);
                 if(hitInfo.transform.gameObject.tag == "Platform")
-                    playerObject.transform.position = hitInfo.point;
+                {
+                    MarkerObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 0.1f, hitInfo.point.z);
+                    MarkerObj.transform.parent = hitInfo.transform;
+                    StartPos = playerObject.transform.position;
 
+                    MovingToPlat = true;
+                    LerpTime = 0.0f;
+                    LerpingTime = 0.0f;
+
+                }
             }
         }
-        
+
+        if(MovingToPlat)
+        {
+            LerpingTime += Time.deltaTime * playerSpeed;
+            if (LerpingTime > 1.0f)
+            {
+                LerpingTime = 1.0f;
+                //MovingToPlat = false;
+            }
+                
+            playerObject.transform.position = Vector3.Lerp(StartPos, MarkerObj.transform.position, LerpingTime);
+
+        }
+
 
     }
 }
