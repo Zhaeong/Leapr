@@ -4,10 +4,11 @@ using System.Collections;
 public class GameMechanicsController : MonoBehaviour {
 
     private int CurTime;
+    PlatformController PCon;
 	// Use this for initialization
 	void Start () {
-	
-	}
+        PCon = gameObject.GetComponent<PlatformController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
