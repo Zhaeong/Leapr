@@ -21,7 +21,7 @@ public class PlatformController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         stepSpeed += Time.deltaTime;
-        int numBlocks = Random.Range(1, 3);
+        int numBlocks = Random.Range(1, 4);
 
         if (stepSpeed > spawnSpeed)
         {
