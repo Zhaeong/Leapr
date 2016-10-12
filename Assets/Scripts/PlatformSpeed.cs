@@ -12,9 +12,7 @@ public class PlatformSpeed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
-
         if (transform.position == endPos)
-            Destroy(gameObject);
-	
+            Destroy(gameObject);	
 	}
 }
