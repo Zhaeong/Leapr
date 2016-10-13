@@ -35,19 +35,7 @@ public class PlatformController : MonoBehaviour {
             stepSpeed = 0.0f;
 
         }
-
-        string[] teststirng = new string[11];
-
-        var intArray = new[] { 1, 2, 3, 4, 5 };
-        var list = new List<int>(intArray);
-
-        string a, b;
-        a.Contains(b, true);
-
-
-
-
-    }
+}
 
     void SpawnPlat(float SpawnLow, float SpawnHigh, float SpawnSpeed)
     {

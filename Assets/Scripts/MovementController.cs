@@ -42,7 +42,6 @@ public class MovementController : MonoBehaviour {
                             playerObject.transform.parent = null;
 
                             MovingToPlat = true;
-                            LerpTime = 0.0f;
                             LerpingTime = 0.0f;
                         }
                     }
@@ -67,7 +66,6 @@ public class MovementController : MonoBehaviour {
                         playerObject.transform.parent = null;
 
                         MovingToPlat = true;
-                        LerpTime = 0.0f;
                         LerpingTime = 0.0f;
                     }
                 }
